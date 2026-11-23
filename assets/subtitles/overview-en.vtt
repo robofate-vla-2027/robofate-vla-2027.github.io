@@ -1,0 +1,149 @@
+WEBVTT
+
+1
+00:00:00.280 --> 00:00:06.756
+RoboFATE: Bridging Risk Anticipation and Corrective Action for Long-Horizon Manipulation.
+
+2
+00:00:09.280 --> 00:00:14.070
+Long-horizon manipulation depends on more than completing the current action.
+
+3
+00:00:14.270 --> 00:00:17.960
+A small misalignment can leave the next operation at risk.
+
+4
+00:00:18.160 --> 00:00:25.404
+These baseline and teacher recordings show why anticipating a recoverable state matters before the task fails.
+
+5
+00:00:29.280 --> 00:00:32.602
+RoboFATE combines two complementary components.
+
+6
+00:00:32.802 --> 00:00:37.713
+A Foresight Controller learns when to intervene from causal observation history.
+
+7
+00:00:37.913 --> 00:00:44.058
+A Mixture of Action Experts uses the captured risk to correct the scene and continue the task.
+
+8
+00:00:46.280 --> 00:00:53.448
+Dual-fate episodes pair a baseline failure with a successful teacher continuation from an earlier restored state.
+
+9
+00:00:53.648 --> 00:00:57.093
+The teacher operates within the original remaining budget.
+
+10
+00:00:57.293 --> 00:01:02.219
+Independent baseline successes provide examples of when not to intervene.
+
+11
+00:01:04.280 --> 00:01:09.140
+The backbone processes camera observations, the instruction, and robot state.
+
+12
+00:01:09.340 --> 00:01:13.303
+Before takeover, the Base Action Expert executes the task.
+
+13
+00:01:13.503 --> 00:01:19.473
+In parallel, the Perceiver and the Foresight Controller monitor the context for an intervention decision.
+
+14
+00:01:23.280 --> 00:01:27.257
+The Perceiver compresses the current context into a latent summary.
+
+15
+00:01:27.457 --> 00:01:33.096
+A causal recurrent controller accumulates summaries from past and present observations.
+
+16
+00:01:33.296 --> 00:01:39.917
+It predicts an intervention trigger and a continuous risk embedding, without access to future observations.
+
+17
+00:01:43.280 --> 00:01:49.256
+At the first positive decision, the Mixture of Action Experts replaces the Base Action Expert.
+
+18
+00:01:49.456 --> 00:01:53.465
+The risk embedding is captured once and held until termination.
+
+19
+00:01:53.665 --> 00:01:59.211
+The Perceiver and controller stop, while fresh observations continue to condition actions.
+
+20
+00:02:01.280 --> 00:02:06.365
+In each mixture layer, the current action token and fixed risk determine routing.
+
+21
+00:02:06.565 --> 00:02:10.082
+Two of eight routed experts are selected for each token.
+
+22
+00:02:10.282 --> 00:02:16.460
+A separate shared expert remains active, and the weighted outputs form the feed-forward representation.
+
+23
+00:02:19.280 --> 00:02:24.588
+We evaluate seventeen selected RoboDojo tasks across five capabilities.
+
+24
+00:02:24.788 --> 00:02:32.341
+RoboFATE and Base Policy plus Mix use the same pretrained checkpoint and original and dual-fate action batches.
+
+25
+00:02:32.541 --> 00:02:41.425
+RoboFATE achieves thirty-four point seven six percent capability-weighted success, a gain of nine point two nine percentage points.
+
+26
+00:02:42.363 --> 00:02:47.413
+The largest category gains appear in long-horizon and precision manipulation.
+
+27
+00:02:47.613 --> 00:02:53.815
+Long-horizon success rises from twenty-four point six seven to forty point eight nine percent.
+
+28
+00:02:54.015 --> 00:02:59.727
+The protocol uses three evaluation seeds and two thousand five hundred fifty trials per method.
+
+29
+00:03:00.655 --> 00:03:07.742
+On AgiBot G2, RoboFATE is evaluated on three household tasks with fifty trials per task.
+
+30
+00:03:07.942 --> 00:03:13.926
+Success rates are ninety, seventy-two, and sixty percent, averaging seventy-four percent.
+
+31
+00:03:14.126 --> 00:03:18.184
+The following clips show individual task and appearance examples.
+
+32
+00:03:19.113 --> 00:03:24.855
+The robot organizes objects on a tabletop, combining object handling with placement.
+
+33
+00:03:29.113 --> 00:03:34.028
+A second complete recording shows another tabletop organization example.
+
+34
+00:03:39.113 --> 00:03:42.985
+The robot rearranges sofa cushions in a household setting.
+
+35
+00:03:49.113 --> 00:03:54.855
+Refrigerator storage requires reaching, object transport, and coordinated placement.
+
+36
+00:03:59.113 --> 00:04:03.124
+The tabletop task is also evaluated under changed lighting.
+
+37
+00:04:09.113 --> 00:04:13.532
+A changed background provides another visual generalization condition.
